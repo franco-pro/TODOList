@@ -20,9 +20,11 @@
   },
   "dependencies": {
     "@types/mysql": "^2.15.26",
+    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-async-handler": "^1.2.0",
     "mysql2": "^3.11.3",
     "sequelize": "^6.37.4"
   }

@@ -69,7 +69,7 @@ const deleteTask = asyncHandler(async (req, res) => {
     return;
     // throw new Error("Task not found");
   }
-  await Task.destroy();
+  await task.destroy();
   res.status(204).send(); //response with status 204(not content)
 });
 
