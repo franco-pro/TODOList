@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../bd_connexion/connection";
+import { sequelizeDB } from "../config/database/connection";
 
 //definition du modele
 class Task extends Model {
@@ -28,12 +28,13 @@ Task.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
   },
-  { sequelize, modelName: "Task" }
+  {
+    sequelize: sequelizeDB,
+    modelName: "task",
+    tableName: "task",
+    timestamps: true,
+  }
 );
 
 export default Task;
