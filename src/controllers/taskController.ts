@@ -13,13 +13,19 @@ const getTasks = asyncHandler(async (req, res) => {
 // @route POST /api/tasks
 //@access public
 const createTask = asyncHandler(async (req, res) => {
-  const { title, description, completed } = req.body;
+  const { title, description, urgent, important, completed } = req.body;
   if (!title) {
     res.status(400).json({ error: "task not find" });
     return;
     throw new Error("Title is required !!");
   }
-  const task = await Task.create({ title, description, completed });
+  const task = await Task.create({
+    title,
+    description,
+    urgent,
+    important,
+    completed,
+  });
   res.status(201).json(task);
 });
 
@@ -42,17 +48,19 @@ const getTask = asyncHandler(async (req, res) => {
 // @access public
 const updateTask = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { title, description, completed } = req.body;
+  const { title, description, urgent, important, completed } = req.body;
   const task = await Task.findByPk(id);
   console.log("task", task);
   if (!task) {
     res.status(400).json({ error: "task not find" });
+    // throw new Error("Task not found !");
     return;
-    throw new Error("Task not found !");
   }
   //update section
   task.title = title || task.title;
   task.description = description || task.description;
+  task.urgent = urgent || task.urgent;
+  task.important = important || task.important;
   task.completed = completed !== undefined ? completed : task.completed;
 
   await task.save(); //save all

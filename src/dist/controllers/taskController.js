@@ -27,13 +27,19 @@ exports.getTasks = getTasks;
 // @route POST /api/tasks
 //@access public
 const createTask = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, description, completed } = req.body;
+    const { title, description, urgent, important, completed } = req.body;
     if (!title) {
         res.status(400).json({ error: "task not find" });
         return;
         throw new Error("Title is required !!");
     }
-    const task = yield task_1.default.create({ title, description, completed });
+    const task = yield task_1.default.create({
+        title,
+        description,
+        urgent,
+        important,
+        completed,
+    });
     res.status(201).json(task);
 }));
 exports.createTask = createTask;
@@ -55,17 +61,19 @@ exports.getTask = getTask;
 // @access public
 const updateTask = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const { title, description, completed } = req.body;
+    const { title, description, urgent, important, completed } = req.body;
     const task = yield task_1.default.findByPk(id);
     console.log("task", task);
     if (!task) {
         res.status(400).json({ error: "task not find" });
+        // throw new Error("Task not found !");
         return;
-        throw new Error("Task not found !");
     }
     //update section
     task.title = title || task.title;
     task.description = description || task.description;
+    task.urgent = urgent || task.urgent;
+    task.important = important || task.important;
     task.completed = completed !== undefined ? completed : task.completed;
     yield task.save(); //save all
     res.status(200).json(task);

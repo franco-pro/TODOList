@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import btnCheck from "./assets/img/btncheck.png";
+import btnDelete from "./assets/img/btndelete.png";
+import viteLogo from "/vite.svg";
+import btnSave from "./assets/img/btnsave.png";
+import btnFile from "./assets/img/file.png";
+import menu from "./assets/img/Menu Btn.png";
+import "./styles/App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="header">
+        <img className="menu" src={menu} alt="logo menu" />
+        <div className="title">
+          <img src={btnFile} alt="logo file" />
+          <span>Your Todo</span>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="body">
+        <div className="projects"></div>
+        <div className="container"></div>
+        <div className="footer">
+          designed by <span>franco-pro</span>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

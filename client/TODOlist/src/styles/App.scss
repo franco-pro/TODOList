@@ -1,0 +1,52 @@
+@use "./color";
+
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: auto;
+  .header {
+    border: 1px solid blue;
+    background: color.$title;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .menu {
+      position: absolute;
+      border: 1px solid red;
+      left: 0;
+      // bottom: 0;
+      width: 89px;
+      height: 64px;
+    }
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1px;
+      img {
+        width: 72px;
+        height: 60px;
+      }
+      span {
+        font-size: 38px;
+        color: #000;
+      }
+    }
+  }
+
+  .body {
+    background: color.$background;
+  }
+  .footer {
+    background: color.$footer;
+    text-align: center;
+    color: #444343;
+    font-size: 20px;
+  }
+}

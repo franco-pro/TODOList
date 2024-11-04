@@ -7,6 +7,9 @@ class Task extends Model {
   public title!: string;
   public description?: string;
   public completed!: boolean;
+  public urgent!: string;
+  public important!: string;
+
   public readonly createdAt!: Date;
 }
 
@@ -23,6 +26,14 @@ Task.init(
     },
     description: {
       type: DataTypes.TEXT,
+    },
+    urgent: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    important: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     completed: {
       type: DataTypes.BOOLEAN,

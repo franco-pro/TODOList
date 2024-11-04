@@ -1,0 +1,50 @@
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: auto;
+}
+.container .header {
+  border: 1px solid blue;
+  background: #ffe794;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.container .header .menu {
+  position: absolute;
+  border: 1px solid red;
+  left: 0;
+  width: 89px;
+  height: 64px;
+}
+.container .header .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+}
+.container .header .title img {
+  width: 72px;
+  height: 60px;
+}
+.container .header .title span {
+  font-size: 38px;
+  color: #000;
+}
+.container .body {
+  background: #ffd7a7;
+}
+.container .footer {
+  background: #ffd874;
+  text-align: center;
+  color: #444343;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=App.css.map */

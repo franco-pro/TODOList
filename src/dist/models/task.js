@@ -18,6 +18,14 @@ Task.init({
     description: {
         type: sequelize_1.DataTypes.TEXT,
     },
+    urgent: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    important: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
     completed: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false,
