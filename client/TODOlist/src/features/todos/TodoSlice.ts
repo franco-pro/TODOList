@@ -53,9 +53,12 @@ export const getDatas = createAsyncThunk("todos/getDatas", async () => {
 export const updateCheckStatus = createAsyncThunk(
   "todos/updateCheck",
   async ({ id, completed }: { id: number; completed: boolean }) => {
-    const response = await axios.patch(`http:localhost:3001/api/tasks/${id}`, {
-      completed,
-    });
+    const response = await axios.patch(
+      `http://localhost:3001/api/tasks/${id}`,
+      {
+        completed,
+      }
+    );
     return response.data;
   }
 );
