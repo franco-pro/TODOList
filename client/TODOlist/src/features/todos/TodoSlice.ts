@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState: Todo[] = [];
@@ -35,9 +35,10 @@ export const addTodo = createAsyncThunk(
 //Thunk pour update une tache
 export const updateTodo = createAsyncThunk(
   "todos/updateTodo",
-  async (todo: Todo) => {
-    const response = await axios.put<Todo>(
-      `http:localhost:3001/api/tasks/${todo.id}`
+  async ({ id, updatedTask }: { id: number; updatedTask: Partial<Todo> }) => {
+    const response = await axios.patch<Todo>(
+      `http://localhost:3001/api/tasks/${id}`,
+      updatedTask
     );
     return response.data;
   }
@@ -63,35 +64,26 @@ export const updateCheckStatus = createAsyncThunk(
   }
 );
 
-// //thunk pour remove une table
-// export const deleteTodo = createAsyncThunk(
-//     "todos/removeTodo",
-//     async(todo: Todo)=>{
-//         const response = await axios.delete(`http:localhost/${todo.id}`)
-//         return response.data
-//     }
-// )
+//thunk pour remove une table
+export const removeTodo = createAsyncThunk(
+  "todos/removeTodo",
+  async (id: number) => {
+    await axios.delete(`http://localhost:3001/api/tasks/${id}`);
+    return id;
+  }
+);
 const todoSlice = createSlice({
   name: "todos",
   initialState,
-  reducers: {
-    toggleTodo: (state, action: PayloadAction<number>) => {
-      const todo = state.find((t) => t.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
-    },
-    removeTodo: (state, action: PayloadAction<number>) => {
-      return state.filter((t) => t.id !== action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(addTodo.fulfilled, (state, action) => {
         state.push(action.payload); //ajouter une nouvelle action
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
-        const index = state.findIndex((t) => t.id === action.payload.id);
+        const updateTask = action.payload;
+        const index = state.findIndex((t) => t.id === updateTask.id);
         if (index !== -1) {
           state[index] = action.payload;
         }
@@ -105,9 +97,11 @@ const todoSlice = createSlice({
         if (index !== -1) {
           state[index] = updateCheck; //mettre a jour la tache dans l'etat global
         }
+      })
+      .addCase(removeTodo.fulfilled, (state, action) => {
+        return state.filter((task) => task.id !== action.payload);
       });
   },
 });
 
-export const { toggleTodo, removeTodo } = todoSlice.actions;
 export default todoSlice.reducer;

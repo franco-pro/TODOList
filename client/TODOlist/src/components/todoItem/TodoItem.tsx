@@ -4,13 +4,13 @@ import "./todoItem.css";
 import { AppDispatch, RootState } from "../../store";
 import "./select.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCheckStatus } from "../../features/todos/TodoSlice";
+import { removeTodo, updateCheckStatus } from "../../features/todos/TodoSlice";
 type props = {
+  id: number;
   name: string;
   urgent: boolean;
   important: boolean;
   completed: boolean;
-  id: any;
 };
 
 export const TodoList = () => {
@@ -33,10 +33,15 @@ export const TodoList = () => {
   //Utilisation de useSelector
   const datas = useSelector((state: RootState) => state.todos);
 
-  //pour changer le status du check dans la bd en utilisant l'acrion updateCheckStatus
+  //pour changer le status du check dans la bd en utilisant l'action updateCheckStatus
   const dispatch = useDispatch<AppDispatch>();
   const handleChangeCheckStatus = (id: number, completed: boolean) => {
     dispatch(updateCheckStatus({ id, completed: !completed })); //inverser la valeur du completed dans la bd
+  };
+
+  //fonction pour supprimer une tache
+  const handleDeleteTask = (id: number) => {
+    dispatch(removeTodo(id));
   };
   return (
     <>
@@ -62,7 +67,14 @@ export const TodoList = () => {
                   <span>Pas Important</span>
                 )}
               </div>
-              <div className="btns">update & delete</div>
+              <div className="btns">
+                <button
+                  className="btn-delete"
+                  onClick={() => handleDeleteTask(data.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         );

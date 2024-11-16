@@ -23,6 +23,8 @@ const Form: React.FC = () => {
     if (taskName.trim()) {
       dispatch(addTodo({ taskName, urgent, important }));
       setTaskName("");
+      setUrgent(false);
+      setImportant(false);
     }
   };
 
