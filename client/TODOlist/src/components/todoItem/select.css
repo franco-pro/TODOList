@@ -1,0 +1,44 @@
+.selectDiv {
+  min-width: 150px;
+}
+.selectDiv .selectImportant,
+.selectDiv .selectUrgent {
+  position: relative;
+}
+.selectDiv .selectImportant::before, .selectDiv .selectImportant::after,
+.selectDiv .selectUrgent::before,
+.selectDiv .selectUrgent::after {
+  --size: 0.3em;
+  position: absolute;
+  content: "";
+  right: 1rem;
+  pointer-events: none;
+}
+.selectDiv .selectImportant::before,
+.selectDiv .selectUrgent::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid black;
+  top: 30%;
+}
+.selectDiv .selectImportant::after,
+.selectDiv .selectUrgent::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid black;
+  top: 55%;
+}
+.selectDiv select {
+  appearance: none;
+  background-color: #ffb760;
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.275em 6em 0.275em 1em;
+  border: 1px transparent #caced1;
+  border-radius: 0.25rem;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+}
+
+/*# sourceMappingURL=select.css.map */

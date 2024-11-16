@@ -1,0 +1,62 @@
+@use "../../styles//color";
+
+.todos {
+  display: flex;
+  .containerTodo {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3, 1fr);
+    background: color.$primaryColor;
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    label {
+      cursor: pointer;
+      input {
+        cursor: pointer;
+      }
+    }
+    .importantUrgent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+    }
+    .btns {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+    }
+  }
+}
+
+//scss form
+.containerForm {
+  display: flex;
+  margin: 0 10px;
+  place-items: center;
+  gap: 20px;
+
+  input {
+    border: 1px solid color.$primaryColor;
+    border-radius: 10px;
+    padding: 10px 5px;
+    height: 15px;
+    outline: none;
+  }
+  .selectDiv {
+    display: flex;
+    place-items: center;
+    gap: 20px;
+  }
+  button {
+    background-color: color.$success;
+    &:hover {
+      // background-color: darken($color: color.$success, $amount: 20);
+      transition: 0.4s all;
+    }
+  }
+}

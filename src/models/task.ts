@@ -4,8 +4,7 @@ import { sequelizeDB } from "../config/database/connection";
 //definition du modele
 class Task extends Model {
   public id!: number;
-  public title!: string;
-  public description?: string;
+  public name!: string;
   public completed!: boolean;
   public urgent!: string;
   public important!: string;
@@ -20,12 +19,9 @@ Task.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
     },
     urgent: {
       type: DataTypes.BOOLEAN,

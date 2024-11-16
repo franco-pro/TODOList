@@ -5,10 +5,13 @@ import {
   createTask,
   updateTask,
   deleteTask,
+  updateCheckStatus,
 } from "../controllers/taskController";
 const router = express.Router();
 
-//api endpoints
+//|--------------------|
+//|  api endpoints     |
+//|-------------------|
 //GET all tasks
 router.route("/").get(getTasks);
 
@@ -20,6 +23,9 @@ router.route("/:id").get(getTask);
 
 //update task by id
 router.route("/:id").put(updateTask);
+
+//update completed's value
+router.route("/:id").patch(updateCheckStatus);
 
 //delete task by id
 router.route("/:id").delete(deleteTask);

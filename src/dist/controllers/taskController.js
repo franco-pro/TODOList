@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTask = exports.updateTask = exports.createTask = exports.getTask = exports.getTasks = void 0;
+exports.deleteTask = exports.updateCheckStatus = exports.updateTask = exports.createTask = exports.getTask = exports.getTasks = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler")); ////instead of using try ... catch , we can rather use middleware express-async-handler
 const task_1 = __importDefault(require("../models/task"));
 // @desc GET all tasks
@@ -27,15 +27,15 @@ exports.getTasks = getTasks;
 // @route POST /api/tasks
 //@access public
 const createTask = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, description, urgent, important, completed } = req.body;
-    if (!title) {
+    console.log(req.body);
+    const { name, urgent, important, completed } = req.body;
+    if (!name) {
         res.status(400).json({ error: "task not find" });
-        return;
         throw new Error("Title is required !!");
+        return;
     }
     const task = yield task_1.default.create({
-        title,
-        description,
+        name,
         urgent,
         important,
         completed,
@@ -61,7 +61,7 @@ exports.getTask = getTask;
 // @access public
 const updateTask = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const { title, description, urgent, important, completed } = req.body;
+    const { name, urgent, important, completed } = req.body;
     const task = yield task_1.default.findByPk(id);
     console.log("task", task);
     if (!task) {
@@ -70,8 +70,7 @@ const updateTask = (0, express_async_handler_1.default)((req, res) => __awaiter(
         return;
     }
     //update section
-    task.title = title || task.title;
-    task.description = description || task.description;
+    task.name = name || task.name;
     task.urgent = urgent || task.urgent;
     task.important = important || task.important;
     task.completed = completed !== undefined ? completed : task.completed;
@@ -79,6 +78,22 @@ const updateTask = (0, express_async_handler_1.default)((req, res) => __awaiter(
     res.status(200).json(task);
 }));
 exports.updateTask = updateTask;
+// @desc update a check status
+// @route PATCH /api/task/:id
+// @access public
+const updateCheckStatus = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { completed } = req.body;
+    const task = yield task_1.default.findByPk(id);
+    if (!task) {
+        res.status(404).json({ error: "Task no found !!" });
+        return;
+    }
+    task.completed = completed; //mettre a jour la valeur du completed
+    yield task.save();
+    res.status(200).json(task); //retourner la tache update
+}));
+exports.updateCheckStatus = updateCheckStatus;
 // @desc delete a task
 // @route DELETE /api/task/:id
 //@access public

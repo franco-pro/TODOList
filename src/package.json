@@ -19,6 +19,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "@types/mysql": "^2.15.26",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",

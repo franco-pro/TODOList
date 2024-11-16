@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["todoItem.scss","../../styles/_color.scss"],"names":[],"mappings":"AAEA;EACE;;AACA;EACE;EACA;EACA;EACA,YCPW;EDQX;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;;AACA;EACE;;AAGJ;EACE;EACA;EACA;EACA;;AAEF;EACE;EACA;EACA;;;AAMN;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;;AAEF;EACE;EACA;EACA;;AAEF;EACE,kBC/CM;;ADgDN;EAEE","file":"todoItem.css"}

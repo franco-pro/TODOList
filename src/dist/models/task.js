@@ -11,12 +11,9 @@ Task.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    title: {
+    name: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-    },
-    description: {
-        type: sequelize_1.DataTypes.TEXT,
     },
     urgent: {
         type: sequelize_1.DataTypes.BOOLEAN,

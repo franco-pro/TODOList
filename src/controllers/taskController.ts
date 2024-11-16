@@ -13,15 +13,15 @@ const getTasks = asyncHandler(async (req, res) => {
 // @route POST /api/tasks
 //@access public
 const createTask = asyncHandler(async (req, res) => {
-  const { title, description, urgent, important, completed } = req.body;
-  if (!title) {
+  console.log(req.body);
+  const { name, urgent, important, completed } = req.body;
+  if (!name) {
     res.status(400).json({ error: "task not find" });
-    return;
     throw new Error("Title is required !!");
+    return;
   }
   const task = await Task.create({
-    title,
-    description,
+    name,
     urgent,
     important,
     completed,
@@ -48,7 +48,7 @@ const getTask = asyncHandler(async (req, res) => {
 // @access public
 const updateTask = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { title, description, urgent, important, completed } = req.body;
+  const { name, urgent, important, completed } = req.body;
   const task = await Task.findByPk(id);
   console.log("task", task);
   if (!task) {
@@ -57,14 +57,30 @@ const updateTask = asyncHandler(async (req, res) => {
     return;
   }
   //update section
-  task.title = title || task.title;
-  task.description = description || task.description;
+  task.name = name || task.name;
   task.urgent = urgent || task.urgent;
   task.important = important || task.important;
   task.completed = completed !== undefined ? completed : task.completed;
 
   await task.save(); //save all
   res.status(200).json(task);
+});
+
+// @desc update a check status
+// @route PATCH /api/task/:id
+// @access public
+const updateCheckStatus = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+  const task = await Task.findByPk(id);
+  if (!task) {
+    res.status(404).json({ error: "Task no found !!" });
+    return;
+  }
+
+  task.completed = completed; //mettre a jour la valeur du completed
+  await task.save();
+  res.status(200).json(task); //retourner la tache update
 });
 
 // @desc delete a task
@@ -81,4 +97,11 @@ const deleteTask = asyncHandler(async (req, res) => {
   res.status(204).send(); //response with status 204(not content)
 });
 
-export { getTasks, getTask, createTask, updateTask, deleteTask };
+export {
+  getTasks,
+  getTask,
+  createTask,
+  updateTask,
+  updateCheckStatus,
+  deleteTask,
+};

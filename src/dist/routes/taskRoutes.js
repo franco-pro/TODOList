@@ -8,7 +8,9 @@ const express_1 = __importDefault(require("express"));
 const taskController_1 = require("../controllers/taskController");
 const router = express_1.default.Router();
 exports.router = router;
-//api endpoints
+//|--------------------|
+//|  api endpoints     |
+//|-------------------|
 //GET all tasks
 router.route("/").get(taskController_1.getTasks);
 //create task
@@ -17,5 +19,7 @@ router.route("/").post(taskController_1.createTask);
 router.route("/:id").get(taskController_1.getTask);
 //update task by id
 router.route("/:id").put(taskController_1.updateTask);
+//update completed's value
+router.route("/:id").patch(taskController_1.updateCheckStatus);
 //delete task by id
 router.route("/:id").delete(taskController_1.deleteTask);

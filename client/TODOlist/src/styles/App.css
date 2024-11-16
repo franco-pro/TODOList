@@ -4,43 +4,49 @@
   box-sizing: border-box;
 }
 
-.container {
+.containerDiv {
   width: 100vw;
-  height: auto;
 }
-.container .header {
-  border: 1px solid blue;
+.containerDiv .header {
   background: #ffe794;
   display: flex;
+  padding: 10px 0;
   justify-content: center;
   align-items: center;
   position: relative;
 }
-.container .header .menu {
+.containerDiv .header .menu {
+  display: flex;
   position: absolute;
-  border: 1px solid red;
   left: 0;
-  width: 89px;
-  height: 64px;
 }
-.container .header .title {
+.containerDiv .header .title {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1px;
 }
-.container .header .title img {
-  width: 72px;
-  height: 60px;
-}
-.container .header .title span {
+.containerDiv .header .title span {
   font-size: 38px;
   color: #000;
 }
-.container .body {
+.containerDiv .body {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-areas: "Project Container";
   background: #ffd7a7;
 }
-.container .footer {
+.containerDiv .body .projects {
+  grid-area: Project;
+  background: #fff;
+}
+.containerDiv .body .container {
+  grid-area: Container;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+.containerDiv .footer {
   background: #ffd874;
   text-align: center;
   color: #444343;
