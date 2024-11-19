@@ -18,7 +18,7 @@ router.route("/").post(taskController_1.createTask);
 //get specific task
 router.route("/:id").get(taskController_1.getTask);
 //update task by id
-router.route("/:id").put(taskController_1.updateTask);
+router.route("/:id").patch(taskController_1.updateTask);
 //update completed's value
 router.route("/:id").patch(taskController_1.updateCheckStatus);
 //delete task by id

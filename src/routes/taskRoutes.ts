@@ -22,7 +22,7 @@ router.route("/").post(createTask);
 router.route("/:id").get(getTask);
 
 //update task by id
-router.route("/:id").put(updateTask);
+router.route("/:id").patch(updateTask);
 
 //update completed's value
 router.route("/:id").patch(updateCheckStatus);
